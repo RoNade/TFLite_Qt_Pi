@@ -44,7 +44,7 @@ linux{
     }
 }
 
-LIBS += -ltensorflow-lite -ldl
+LIBS += -ltensorflow-lite -ldl -lrt
 
 # Default rules for deployment.
 qnx: target.path = /tmp/$${TARGET}/bin
