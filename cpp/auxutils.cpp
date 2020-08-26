@@ -18,6 +18,7 @@
 
 #include "colormanager.h"
 #include "math.h"
+#include <QPainterPath>
 
 double AuxUtils::dpi(QSizeF size)
 {
