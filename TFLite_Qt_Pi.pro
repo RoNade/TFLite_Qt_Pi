@@ -1,4 +1,4 @@
-QT += quick multimedia sensors multimedia-private
+QT += quick multimedia sensors
 CONFIG += console c++11 qml_debug
 
 # The following define makes your compiler emit warnings if you use

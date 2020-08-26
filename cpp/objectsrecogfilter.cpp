@@ -6,7 +6,6 @@
 #include <QMutexLocker>
 
 #include "auxutils.h"
-#include "private/qvideoframe_p.h"
 
 // WARNING: same TensorFlow initialization repeated in ObjectRecogFilter and TensorFlowQML constructors
 ObjectsRecogFilter::ObjectsRecogFilter()
@@ -241,7 +240,7 @@ QVideoFrame ObjectsRecogFilterRunable::run(QVideoFrame *input, const QVideoSurfa
             // surfaceFormat.isMirrored() == false for Android
             mirrorVertical = true;
         }
-        else img = qt_imageFromVideoFrame(*input);
+        else img = input->image();
 
         // Check if mirroring is needed
         if (!mirrorVertical) mirrorVertical = surfaceFormat.isMirrored();
