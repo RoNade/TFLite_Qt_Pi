@@ -21,17 +21,16 @@ QML_IMPORT_PATH =
 QML_DESIGNER_IMPORT_PATH =
 
 INCLUDEPATH += $$PWD/cpp \
-               $$PWD/../../librairies/tensorflow \
-               $$PWD/../../librairies/tensorflow/tensorflow/lite/tools/make/downloads/flatbuffers/include
+               /home/mbagassien/sdks/fsl-imx-xwayland/5.4-zeus/sysroots/aarch64-poky-linux/usr/include/tensorflow/ \
+               /home/mbagassien/sdks/fsl-imx-xwayland/5.4-zeus/sysroots/aarch64-poky-linux/usr/include/tensorflow/lite/tools/make/downloads/flatbuffers/include \
+               /home/mbagassien/sdks/fsl-imx-xwayland/5.4-zeus/sysroots/aarch64-poky-linux/usr/include/tensorflow/lite/tools/make/downloads/gemmlowp
 
 # We consider Linux and distinguish between Raspbian (for Raspberry Pi) and other Linux distributions
 linux{
-    contains(QMAKE_CXX, .*raspbian.*arm.*):{
+    contains(QMAKE_CXX, *aarch64*):{
         # TensorFlow Lite lib path
-        LIBS += -L$$PWD/../tensorflow/tensorflow/lite/tools/make/gen/rpi_armv7l/lib
-
         # Assets to be deployed: path and files
-        assets.path = /home/pi/qt_apps/$${TARGET}/bin/assets
+        assets.path = /home/root/assets
         assets.files = assets/*
     }
     else {
