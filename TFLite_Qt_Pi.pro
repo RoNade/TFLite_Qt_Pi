@@ -16,31 +16,32 @@ RESOURCES += qml.qrc
 
 # Additional import path used to resolve QML modules in Qt Creator's code model
 QML_IMPORT_PATH =
-
 # Additional import path used to resolve QML modules just for Qt Quick Designer
 QML_DESIGNER_IMPORT_PATH =
 
-INCLUDEPATH += $$PWD/cpp \
-               /home/mbagassien/sdks/fsl-imx-xwayland/5.4-zeus/sysroots/aarch64-poky-linux/usr/include/tensorflow/ \
-               /home/mbagassien/sdks/fsl-imx-xwayland/5.4-zeus/sysroots/aarch64-poky-linux/usr/include/tensorflow/lite/tools/make/downloads/flatbuffers/include \
-               /home/mbagassien/sdks/fsl-imx-xwayland/5.4-zeus/sysroots/aarch64-poky-linux/usr/include/tensorflow/lite/tools/make/downloads/gemmlowp
-
-# We consider Linux and distinguish between Raspbian (for Raspberry Pi) and other Linux distributions
+# We consider Linux and distinguish Arm 64 bits (for i.mx8) and other Linux distributions
 linux{
-    contains(QMAKE_CXX, *aarch64*):{
-        # TensorFlow Lite lib path
+    contains(QMAKE_CXX, .*aarch64.*) {
+        INCLUDEPATH += $$PWD/cpp \
+                       =/usr/include/tensorflow/lite/tools/make/downloads/flatbuffers/include \
+                       =/usr/include/tensorflow/lite/tools/make/downloads/gemmlowp
+
         # Assets to be deployed: path and files
-        assets.path = /home/root/assets
+        # assets.path = /home/root/assets
         assets.files = assets/*
     }
     else {
         # TensorFlow Lite lib path
         LIBS += -L$$PWD/../../librairies/tensorflow/tensorflow/lite/tools/make/gen/linux_x86_64/lib
-
+        INCLUDEPATH += $$PWD/cpp \
+                       $$PWD/../tensorflow \
+                       $$PWD/../tensorflow/tensorflow/lite/tools/make/downloads/flatbuffers/include \
+                       $$PWD/../tensorflow/lite/tools/make/downloads/gemmlowp
         # Assets to be deployed: path and files
         # WARNING: Define yourself the path!
-        assets.path = /home/rnade/Programs/Qt/Projects/$${TARGET}/assets
+        # assets.path = /home/user/app
         assets.files = assets/*
+
     }
 }
 
